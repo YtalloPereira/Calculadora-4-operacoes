@@ -25,7 +25,7 @@ class Calculator{
     //processando todas as operações da calculadora
     processOperation(operation){
         //checando se o valor atual é vazio para tornar possivel a mudança de operação
-        if(this.currentOperationText.innerText ===''){
+        if(this.currentOperationText.innerText ==='' && operation !== 'C'){
             //Mudando a operação
             if(this.previousOperationText.innerText !== ''){
                 this.changeOperation(operation)
@@ -60,7 +60,9 @@ class Calculator{
             case 'CE':
                 this.processClearCurrentOperation()
                 break
-           
+            case 'C':
+                this.processClearAllOperations()
+                break
             default:
                 return
         }
@@ -104,6 +106,11 @@ class Calculator{
       //limpa a operação atual
       processClearCurrentOperation(){
         this.currentOperationText.innerText  = ''
+      }
+      //limpa todas as operações
+      processClearAllOperations(){
+        this.currentOperationText.innerText  = ''
+        this.previousOperationText.innerText  = ''
       }
 }
 
