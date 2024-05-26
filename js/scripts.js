@@ -14,6 +14,10 @@ class Calculator{
     }
     //Adicionando digito na tela
     addDigit(digit){
+        //checando se a operação atual ja tem um ponto/
+        if(digit === '.' && this.currentOperationText.innerText.includes('.')){
+            return
+        }
         this.currentOperation = digit
         this.updateScren()
     }
