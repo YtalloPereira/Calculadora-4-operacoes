@@ -19,12 +19,45 @@ class Calculator{
             return
         }
         this.currentOperation = digit
-        this.updateScren()
+        this.updateScreen()
+    }
+
+    //processando todas as operações da calculadora
+    processOperation(operation){
+        //pegando os valores atuais e anteriores
+        let operationValue
+        const previous = +this.previousOperationText.innerText.split(' ')[0]
+        const current = +this.currentOperationText.innerText
+
+        switch(operation){
+            case '+':
+                operationValue = previous + current
+                this.updateScreen(operationValue, operation, current, previous)
+                break
+            default:
+                return
+        }
     }
 
     //Atualiza os valores na tela ou seja mostra os valores dos botões que o usuário clicoi
-    updateScren(){
-        this.currentOperationText.innerText += this.currentOperation
+    updateScreen(
+        operationValue = null, 
+        operation = null, 
+        current = null, 
+        previous = null
+    ){
+        console.log(operationValue, operation, current, previous)
+        if(operationValue === null){
+            this.currentOperationText.innerText += this.currentOperation
+        }else{
+            //checando se o valor é zero, se sim, é adicionado ao atual
+            if(previous === 0){
+                operationValue = current
+            }
+            //adicionando o valor atual para ao anterior
+            this.previousOperationText.innerText = `${operationValue} ${operation}`
+            this.currentOperationText.innerText = ''
+        }
     }
 }
 
@@ -39,7 +72,7 @@ buttons.forEach((btn) =>{
         if(+value >= 0 || value === '.'){
             calc.addDigit(value)
         }else{
-            console.log('Op: '+ value)
+            calc.processOperation(value)
         }
     })
 })
