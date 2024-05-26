@@ -57,6 +57,10 @@ class Calculator{
             case 'DEL':
                 this.processDelOperator()
                 break
+            case 'CE':
+                this.processClearCurrentOperation()
+                break
+           
             default:
                 return
         }
@@ -96,6 +100,10 @@ class Calculator{
       //deleta  o último dígito
       processDelOperator(){
         this.currentOperationText.innerText  = this.currentOperationText.innerText.slice(0, -1)
+      }
+      //limpa a operação atual
+      processClearCurrentOperation(){
+        this.currentOperationText.innerText  = ''
       }
 }
 
